@@ -1,0 +1,136 @@
+<apex:page >
+ <script>
+    function Topbtn(){
+      var firstArray = new Array();
+      var secondArray = new Array();
+      var finalArray = new Array();
+     var optList = document.getElementById("select");
+     
+         for(var i=0;i<optList.options.length;i++){                     
+             if(optList.options[i].selected==true){
+               firstArray.push(optList.options[i].text);
+             }else{
+               secondArray.push(optList.options[i].text);
+             }                            
+         }         
+         finalArray = firstArray.concat(secondArray);
+         alert("finalArray===>"+finalArray);
+                  
+       optList.options.length=0;
+       for(var i=0;i<finalArray.length;i++){
+          var c = document.createElement("option");
+            c.text = finalArray[i];
+            c.value=i;
+            optList.options.add(c, i);
+       }
+    }
+    
+     function Bottombtn(){
+      var firstArray = new Array();
+      var secondArray = new Array();
+      var finalArray = new Array();
+     var optList = document.getElementById("select");
+     
+         for(var i=0;i<optList.options.length;i++){                     
+             if(optList.options[i].selected==true){
+               firstArray.push(optList.options[i].text);
+             }else{
+               secondArray.push(optList.options[i].text);
+             }                            
+         }         
+         finalArray = secondArray.concat(firstArray);
+         alert("finalArray===>"+finalArray);
+                  
+       optList.options.length=0;
+       for(var i=0;i<finalArray.length;i++){
+          var c = document.createElement("option");
+            c.text = finalArray[i];
+            c.value=i;
+            optList.options.add(c, i);
+       }
+    }
+    
+   
+   function upBtn(){
+      var firstArray = new Array();
+      var optList = document.getElementById("select");
+     
+         for(var i=0;i<optList.options.length;i++){                     
+             if(optList.options[i].selected==true && i!=0){
+               var temp = firstArray[firstArray.length-1];
+               firstArray[firstArray.length-1]=optList.options[i].text;
+               firstArray.push(temp);
+             }else{               
+               firstArray.push(optList.options[i].text);
+             }                            
+         }
+         alert("firstArray===>"+firstArray);
+         optList.options.length=0;
+          
+          for(var i=0;i<firstArray.length;i++){
+            var c = document.createElement("option");
+            c.text = firstArray[i];
+            c.value=i;
+            optList.options.add(c, i);
+          }
+   }
+   
+   
+   function downBtn(){
+      var firstArray = new Array();
+      var secondArray = new Array();
+      var optList = document.getElementById("select");
+        
+         for(var i=0;i<optList.options.length;i++){                     
+             if(optList.options[i].selected==true && i!=optList.options.length-1){
+                    secondArray.push(optList.options[i].text);
+             }else{ 
+                   firstArray.push(optList.options[i].text);
+                    if(secondArray.length != 0){
+                     firstArray=firstArray.concat(secondArray);
+                     secondArray=[];
+                    }  
+             }                            
+         }
+        
+         alert("firstArray===>"+firstArray);
+         optList.options.length=0;
+          
+          for(var i=0;i<firstArray.length;i++){
+            var c = document.createElement("option");
+            c.text = firstArray[i];
+            c.value=i;
+            optList.options.add(c, i);
+          }
+   }
+   
+    
+ </script>
+ <apex:form >  
+      <table width="100%">
+     <tr> 
+       <td>   
+        <select name="cars" id="select" multiple="multiple" style="height: 220px;">
+            <option value="1">Product1</option>
+            <option value="2">Product2</option>
+            <option value="3">Product3</option>
+            <option value="4">Product4</option>
+            <option value="3">Product5</option>
+            <option value="4">Product6</option>
+            <option value="3">Product7</option>
+            <option value="4">Product8</option>
+        </select>            
+        </td>
+      <td>
+        <apex:panelGrid columns="1" style="float:right;padding-right: 950px;padding-top: 15px;" > 
+               
+        <apex:commandButton value="Top" onclick="Topbtn(); return false;"/>         
+        <apex:commandButton value="Up" onclick="upBtn(); return false;"/>        
+        <apex:commandButton value="Down" onclick="downBtn(); return false;"/>
+        <apex:commandButton value="Bottom" onclick="Bottombtn(); return false;"/>        
+        </apex:panelGrid>
+      </td>
+     </tr> 
+      </table>
+ </apex:form>
+</apex:page>
